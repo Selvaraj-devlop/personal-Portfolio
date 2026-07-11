@@ -42,7 +42,7 @@ export default function Experience() {
                   {/* Card */}
                   <div
                     className="exp-card"
-                    style={{ '--card-color': exp.color }}
+                    style={{ '--card-color': exp.color, position: 'relative' }}
                   >
                     <div
                       style={{
@@ -64,19 +64,24 @@ export default function Experience() {
                           <span><FiCalendar /> {exp.period}</span>
                           <span>&nbsp;·&nbsp;</span>
                           <span><FiMapPin /> {exp.location}</span>
-                          <span>&nbsp;·&nbsp;</span>
-                          <span style={{
-                            background: `${exp.color}22`,
-                            border: `1px solid ${exp.color}44`,
-                            color: exp.color,
-                            borderRadius: 100,
-                            padding: '0.1rem 0.5rem',
-                            fontSize: '0.68rem',
-                          }}>
-                            {exp.type}
-                          </span>
                         </div>
                       </div>
+                      
+                      {/* Job Type Badge (Top Right) */}
+                      <span style={{
+                        position: 'absolute',
+                        top: '1.2rem',
+                        right: '1.2rem',
+                        background: `${exp.color}22`,
+                        border: `1px solid ${exp.color}44`,
+                        color: exp.color,
+                        borderRadius: 100,
+                        padding: '0.2rem 0.6rem',
+                        fontSize: '0.7rem',
+                        fontWeight: 600
+                      }}>
+                        {exp.type}
+                      </span>
                     </div>
 
                     {/* Highlights */}

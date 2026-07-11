@@ -216,15 +216,15 @@ export default function Navbar({ onCommandOpen }) {
                   fontFamily: 'var(--font-body)',
                   fontSize: '0.75rem',
                   fontWeight: 600,
-                  boxShadow: '0 0 20px rgba(97,218,251,0.45)',
+                  boxShadow: 'none',
                   border: '1px solid rgba(167,139,250,0.3)',
                   letterSpacing: '0.01em',
                   transition: 'box-shadow 0.2s ease, opacity 0.3s ease',
                   opacity: mobileOpen ? 0 : 1,
                   pointerEvents: mobileOpen ? 'none' : 'auto',
                 }}
-                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 0 32px rgba(97,218,251,0.75)'; }}
-                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 20px rgba(97,218,251,0.45)'; }}
+                onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 0 8px rgba(97,218,251,0.5)'; }}
+                onMouseLeave={(e) => { e.currentTarget.style.boxShadow = 'none'; }}
               >
                 <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
                   <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>

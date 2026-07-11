@@ -32,10 +32,11 @@ export default function Certifications() {
         </div>
 
         <div className="row justify-content-center g-4">
+          {/* Achievements (3 per row) */}
           {certifications.map((cert, i) => (
             <div key={i} className="col-lg-4 col-md-6 reveal" style={{ animationDelay: `${i * 0.15}s` }}>
               <div
-                className="cert-card"
+                className="cert-card h-100"
                 style={{
                   borderTop: `2px solid ${cert.color}`,
                   '--cert-color': cert.color,
@@ -94,10 +95,10 @@ export default function Certifications() {
           ))}
         </div>
 
-        {/* Seminars note */}
-        <div className="row justify-content-center mt-4">
-          <div className="col-lg-8 reveal">
-            <div className="glass-card p-4">
+        {/* Seminars note (Full width equal to the 3 certificates) */}
+        <div className="row mt-4">
+          <div className="col-12 reveal" style={{ animationDelay: '0.3s' }}>
+            <div className="glass-card p-4 h-100">
               <div className="d-flex align-items-center gap-2 mb-3">
                 <span style={{ fontSize: '1.3rem', color: 'var(--primary)' }}><FiMic /></span>
                 <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.1rem', fontWeight: 700, color: 'white', margin: 0 }}>

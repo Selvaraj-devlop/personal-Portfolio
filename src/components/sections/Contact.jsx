@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useMultiReveal } from '../../hooks/useScrollReveal';
 import { personalInfo } from '../../data/portfolioData';
 import toast, { Toaster } from 'react-hot-toast';
+import emailjs from '@emailjs/browser';
 import { FaGithub, FaLinkedin, FaEnvelope, FaPhone, FaMapMarkerAlt } from 'react-icons/fa';
 
 export default function Contact() {
@@ -37,19 +38,27 @@ export default function Contact() {
     }
     setLoading(true);
     
-    // Simplest zero-setup method: open the user's default email client
-    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
-    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
-    const mailtoLink = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
-    
-    window.location.href = mailtoLink;
-    
-    // Show success after a brief delay so the email client has time to open
-    setTimeout(() => {
-      toast.success('Opening your email client... 🚀', { style: toastStyle });
+    try {
+      await emailjs.send(
+        import.meta.env.VITE_EMAILJS_SERVICE_ID || "YOUR_SERVICE_ID",
+        import.meta.env.VITE_EMAILJS_TEMPLATE_ID || "YOUR_TEMPLATE_ID",
+        {
+          from_name: form.name,
+          to_name: personalInfo.name,
+          from_email: form.email,
+          message: form.message,
+        },
+        import.meta.env.VITE_EMAILJS_PUBLIC_KEY || "YOUR_PUBLIC_KEY"
+      );
+      
+      toast.success('Message sent successfully! 🚀', { style: toastStyle });
       setForm({ name: '', email: '', message: '' });
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to send message. Please try again.', { style: toastStyle });
+    } finally {
       setLoading(false);
-    }, 1000);
+    }
   };
 
   const toastStyle = {

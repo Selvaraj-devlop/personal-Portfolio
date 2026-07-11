@@ -9,7 +9,7 @@ export const personalInfo = {
     "Problem Solver",
   ],
   location: "Tamil Nadu, India",
-  email: "Selvarajcdev@gmail.com",
+  email: "selvarajcdev@gmail.com",
   phone: "+91 6374821351",
   linkedin: "https://linkedin.com/in/selvarajc",
   github: "https://github.com/selvarajc",

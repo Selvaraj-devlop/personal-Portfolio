@@ -72,8 +72,56 @@ export default function About() {
         </div>
 
         <div className="row g-4 align-items-start">
-          {/* Left — Summary + Info */}
-          <div className="col-lg-7">
+          {/* Left — Avatar, Stats & Passion */}
+          <div className="col-lg-5 order-1 order-lg-1">
+            {/* Avatar card */}
+            <div className="glass-card p-4 text-center mb-4 reveal" style={{ position: 'relative', overflow: 'hidden' }}>
+              <div style={{
+                width: 120, height: 120, borderRadius: '50%', margin: '0 auto 1rem',
+                background: 'linear-gradient(135deg, rgba(108,99,255,0.3), rgba(0,229,255,0.3))',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                border: '2px solid rgba(108,99,255,0.4)',
+                boxShadow: '0 0 30px rgba(108,99,255,0.3)',
+                color: 'white',
+              }}>
+                <img src={profileImg} alt="Selvaraj C" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
+              </div>
+              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', fontWeight: 700, color: 'white' }}>
+                Selvaraj C
+              </div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', fontFamily: 'var(--font-code)', marginBottom: '0.5rem' }}>
+                MERN Stack Developer
+              </div>
+              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
+                📍 Tamil Nadu
+              </div>
+              <div style={{
+                position: 'absolute', top: 0, left: 0, right: 0, height: 3,
+                background: 'linear-gradient(90deg, var(--primary), var(--secondary), var(--accent))',
+              }} />
+            </div>
+
+            <div className="row g-3 text-center">
+              {stats.map((s, i) => (
+                <div key={s.label} className="col-6">
+                  <StatCard value={s.value} suffix={s.suffix} label={s.label} delay={i * 0.1} />
+                </div>
+              ))}
+            </div>
+
+            {/* Passion statement */}
+            <div className="glass-card p-3 mt-4 reveal" style={{ borderLeft: '3px solid var(--primary)' }}>
+              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', lineHeight: 1.7 }}>
+                "Passionate about crafting beautiful, responsive web applications that deliver exceptional user experiences and solve real-world problems."
+              </div>
+              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--primary)', fontFamily: 'var(--font-code)' }}>
+                — Selvaraj C
+              </div>
+            </div>
+          </div>
+
+          {/* Right — Summary + Info */}
+          <div className="col-lg-7 order-2 order-lg-2">
             {/* Summary */}
             <div className="about-summary-card reveal mb-4">
               <h3 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.2rem', fontWeight: 700, marginBottom: '1rem', color: 'white' }}>
@@ -117,54 +165,6 @@ export default function About() {
                 {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'HTML5', 'CSS3', 'Bootstrap', 'REST APIs', 'Postman', 'Git'].map((t) => (
                   <span key={t} className="tech-badge">{t}</span>
                 ))}
-              </div>
-            </div>
-          </div>
-
-          {/* Right — Stats */}
-          <div className="col-lg-5">
-            <div className="row g-3">
-              {stats.map((s, i) => (
-                <div key={s.label} className="col-6">
-                  <StatCard value={s.value} suffix={s.suffix} label={s.label} delay={i * 0.1} />
-                </div>
-              ))}
-            </div>
-
-            {/* Avatar card */}
-            <div className="glass-card p-4 text-center mt-3 reveal" style={{ position: 'relative', overflow: 'hidden' }}>
-              <div style={{
-                width: 120, height: 120, borderRadius: '50%', margin: '0 auto 1rem',
-                background: 'linear-gradient(135deg, rgba(108,99,255,0.3), rgba(0,229,255,0.3))',
-                display: 'flex', alignItems: 'center', justifyContent: 'center',
-                border: '2px solid rgba(108,99,255,0.4)',
-                boxShadow: '0 0 30px rgba(108,99,255,0.3)',
-                color: 'white',
-              }}>
-                <img src={profileImg} alt="Selvaraj C" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
-              </div>
-              <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', fontWeight: 700, color: 'white' }}>
-                Selvaraj C
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--secondary)', fontFamily: 'var(--font-code)', marginBottom: '0.5rem' }}>
-                MERN Stack Developer
-              </div>
-              <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                📍 Tamil Nadu
-              </div>
-              <div style={{
-                position: 'absolute', top: 0, left: 0, right: 0, height: 3,
-                background: 'linear-gradient(90deg, var(--primary), var(--secondary), var(--accent))',
-              }} />
-            </div>
-
-            {/* Passion statement */}
-            <div className="glass-card p-3 mt-3 reveal" style={{ borderLeft: '3px solid var(--primary)' }}>
-              <div style={{ fontSize: '0.85rem', color: 'var(--text-muted)', fontStyle: 'italic', lineHeight: 1.7 }}>
-                "Passionate about crafting beautiful, responsive web applications that deliver exceptional user experiences and solve real-world problems."
-              </div>
-              <div style={{ marginTop: '0.5rem', fontSize: '0.75rem', color: 'var(--primary)', fontFamily: 'var(--font-code)' }}>
-                — Selvaraj C
               </div>
             </div>
           </div>
