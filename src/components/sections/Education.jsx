@@ -74,7 +74,7 @@ export default function Education() {
                         <div className="edu-degree">{edu.degree}</div>
                         <div className="edu-institution">{edu.institution}</div>
                         <div className="edu-period d-flex align-items-center gap-2">
-                          <FiCalendar /> {edu.period} &nbsp;·&nbsp; <FiMapPin /> {edu.location}
+                          <FiMapPin /> {edu.location}
                         </div>
                       </div>
 
@@ -90,7 +90,7 @@ export default function Education() {
                         whiteSpace: 'nowrap',
                         marginLeft: '0.5rem',
                       }}>
-                        {edu.period.split('–')[0].trim()}
+                        {edu.period}
                       </div>
                     </div>
                   </div>
@@ -117,7 +117,7 @@ export default function Education() {
                 Successfully completed a comprehensive B.Sc program, gaining a strong foundation in Computer Science with a core specialization in modern web development, algorithms, and software engineering.
               </div>
               <div className="d-flex justify-content-center flex-wrap gap-3 mt-4">
-                {['Graduated', 'Computer Science', 'Tamil Nadu, India'].map((tag) => (
+                {['Graduated', 'Computer Science', 'Tamil Nadu'].map((tag) => (
                   <span key={tag} style={{
                     padding: '0.4rem 1rem',
                     background: 'rgba(97,218,251,0.1)',

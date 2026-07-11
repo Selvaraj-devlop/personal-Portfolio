@@ -97,7 +97,7 @@ export default function Navbar({ onCommandOpen }) {
               href="#hero"
               onClick={(e) => { e.preventDefault(); scrollTo('hero'); }}
               aria-label="Selvaraj C — Home"
-              style={{ textDecoration: 'none', flexShrink: 0 }}
+              style={{ textDecoration: 'none', flexShrink: 0, opacity: mobileOpen ? 0 : 1, transition: 'opacity 0.3s ease', pointerEvents: mobileOpen ? 'none' : 'auto' }}
             >
               <div style={{
                 display: 'flex', alignItems: 'center',
@@ -197,42 +197,6 @@ export default function Navbar({ onCommandOpen }) {
             {/* ── Right: Actions ───────────────────────────────────── */}
             <div style={{ display: 'flex', alignItems: 'center', gap: '0.6rem', flexShrink: 0 }}>
 
-              {/* Cmd+K search trigger */}
-              <button
-                onClick={onCommandOpen}
-                className="d-none d-lg-flex"
-                aria-label="Open command palette (Ctrl+K)"
-                title="Ctrl+K"
-                style={{
-                  display: 'flex', alignItems: 'center', gap: '6px',
-                  padding: '7px 12px',
-                  background: 'rgba(255,255,255,0.04)',
-                  border: '1px solid rgba(97,218,251,0.25)',
-                  borderRadius: '10px',
-                  cursor: 'pointer',
-                  backdropFilter: 'blur(12px)',
-                  transition: 'all 0.2s ease',
-                }}
-                onMouseEnter={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(97,218,251,0.6)';
-                  e.currentTarget.style.background = 'rgba(97,218,251,0.12)';
-                }}
-                onMouseLeave={(e) => {
-                  e.currentTarget.style.borderColor = 'rgba(97,218,251,0.25)';
-                  e.currentTarget.style.background = 'rgba(255,255,255,0.04)';
-                }}
-              >
-                <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="rgba(255,255,255,0.45)" strokeWidth="2.5">
-                  <circle cx="11" cy="11" r="8"/><line x1="21" y1="21" x2="16.65" y2="16.65"/>
-                </svg>
-                <kbd style={{
-                  fontFamily: 'var(--font-code)',
-                  fontSize: '0.65rem',
-                  color: 'rgba(255,255,255,0.35)',
-                  background: 'none', border: 'none', padding: 0,
-                }}>⌘K</kbd>
-              </button>
-
               {/* Resume CTA */}
               <motion.a
                 href="/resume.pdf"
@@ -242,7 +206,7 @@ export default function Navbar({ onCommandOpen }) {
                 whileHover={{ scale: 1.04 }}
                 whileTap={{ scale: 0.97 }}
                 style={{
-                  display: 'inline-flex', alignItems: 'center', gap: '6px',
+                  display: mobileOpen ? 'none' : 'inline-flex', alignItems: 'center', gap: '6px',
                   padding: '7px 16px',
                   borderRadius: '10px',
                   background: 'linear-gradient(135deg, #61DAFB, #3B82F6)',
@@ -254,7 +218,9 @@ export default function Navbar({ onCommandOpen }) {
                   boxShadow: '0 0 20px rgba(97,218,251,0.45)',
                   border: '1px solid rgba(167,139,250,0.3)',
                   letterSpacing: '0.01em',
-                  transition: 'box-shadow 0.2s ease',
+                  transition: 'box-shadow 0.2s ease, opacity 0.3s ease',
+                  opacity: mobileOpen ? 0 : 1,
+                  pointerEvents: mobileOpen ? 'none' : 'auto',
                 }}
                 onMouseEnter={(e) => { e.currentTarget.style.boxShadow = '0 0 32px rgba(97,218,251,0.75)'; }}
                 onMouseLeave={(e) => { e.currentTarget.style.boxShadow = '0 0 20px rgba(97,218,251,0.45)'; }}
@@ -343,31 +309,16 @@ export default function Navbar({ onCommandOpen }) {
               aria-modal="true"
               aria-label="Mobile navigation"
             >
-              {/* Drawer top — brand + close */}
-              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '2rem' }}>
+              {/* Drawer top — brand */}
+              <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', marginBottom: '2rem' }}>
                 <div style={{
                   fontFamily: 'var(--font-heading)',
-                  fontSize: '1rem',
+                  fontSize: '1.2rem',
                   fontWeight: 700,
                   color: '#fff',
                 }}>
                   Selvaraj<span style={{ color: '#61DAFB' }}>.dev</span>
                 </div>
-                <button
-                  onClick={() => setMobileOpen(false)}
-                  aria-label="Close menu"
-                  style={{
-                    width: 32, height: 32,
-                    borderRadius: '8px',
-                    background: 'rgba(97,218,251,0.12)',
-                    border: '1px solid rgba(97,218,251,0.25)',
-                    color: '#61dafb', fontSize: '1rem',
-                    cursor: 'pointer',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  }}
-                >
-                  ✕
-                </button>
               </div>
 
               {/* Links */}
@@ -422,6 +373,7 @@ export default function Navbar({ onCommandOpen }) {
               <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(97,218,251,0.15)' }}>
                 <a
                   href={`mailto:${personalInfo.email}`}
+                  onClick={() => setMobileOpen(false)}
                   style={{
                     display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
                     padding: '12px',

@@ -123,9 +123,8 @@ export default function Skills() {
                 return (
                   <div 
                     key={el.name}
+                    className="skill-card-element"
                     style={{
-                      width: '105px', 
-                      height: '115px',
                       border: `2px solid ${el.color}55`,
                       background: `linear-gradient(135deg, ${el.color}15, rgba(0,0,0,0.4))`,
                       display: 'flex', 
@@ -156,10 +155,8 @@ export default function Skills() {
                     }}
                   >
                     {/* Atomic Number */}
-                    <span style={{ 
+                    <span className="atomic-number" style={{ 
                       position: 'absolute', 
-                      top: 6, left: 8, 
-                      fontSize: '0.65rem', 
                       color: el.color,
                       fontWeight: 600,
                       fontFamily: 'var(--font-code)'
@@ -168,10 +165,8 @@ export default function Skills() {
                     </span>
                     
                     {/* Category Abbreviation */}
-                    <span style={{ 
+                    <span className="category-abbr" style={{ 
                       position: 'absolute', 
-                      top: 6, right: 8, 
-                      fontSize: '0.55rem', 
                       color: 'rgba(255,255,255,0.4)',
                       fontFamily: 'var(--font-code)',
                       textTransform: 'uppercase'
@@ -180,14 +175,13 @@ export default function Skills() {
                     </span>
                     
                     {/* Main Icon & Name */}
-                    <div style={{ margin: 'auto', textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+                    <div className="icon-container" style={{ margin: 'auto', textAlign: 'center', width: '100%', display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                       {IconComponent ? (
-                        <div style={{ marginBottom: '6px' }}>
-                          <IconComponent size={36} color={el.color} style={{ filter: `drop-shadow(0 0 8px ${el.color}80)` }} />
+                        <div style={{ marginBottom: '6px' }} className="skill-icon-wrapper">
+                          <IconComponent className="skill-icon" color={el.color} style={{ filter: `drop-shadow(0 0 8px ${el.color}80)` }} />
                         </div>
                       ) : (
-                        <div style={{ 
-                          fontSize: '1.8rem', 
+                        <div className="skill-symbol" style={{ 
                           fontWeight: 800, 
                           color: el.color, 
                           lineHeight: 1,
@@ -199,8 +193,7 @@ export default function Skills() {
                         </div>
                       )}
 
-                      <div style={{ 
-                        fontSize: '0.65rem', 
+                      <div className="skill-name-text" style={{ 
                         color: 'rgba(255,255,255,0.85)', 
                         whiteSpace: 'nowrap', 
                         overflow: 'hidden', 
@@ -221,6 +214,23 @@ export default function Skills() {
 
         {/* Global Keyframes for the grid stagger */}
         <style>{`
+          .skill-card-element { width: 105px; height: 115px; }
+          .atomic-number { top: 6px; left: 8px; font-size: 0.65rem; }
+          .category-abbr { top: 6px; right: 8px; font-size: 0.55rem; }
+          .skill-icon { width: 36px; height: 36px; }
+          .skill-symbol { font-size: 1.8rem; }
+          .skill-name-text { font-size: 0.65rem; }
+
+          @media (max-width: 768px) {
+            .skill-card-element { width: 72px; height: 82px; padding: 4px !important; }
+            .atomic-number { top: 3px; left: 5px; font-size: 0.55rem; }
+            .category-abbr { top: 3px; right: 5px; font-size: 0.45rem; }
+            .skill-icon { width: 24px; height: 24px; }
+            .skill-symbol { font-size: 1.2rem; }
+            .skill-name-text { font-size: 0.5rem; }
+            .skill-icon-wrapper { margin-bottom: 2px !important; }
+          }
+
           @keyframes fadeInUp {
             to {
               opacity: 1;

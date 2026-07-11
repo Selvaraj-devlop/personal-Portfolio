@@ -3,25 +3,41 @@ import { motion } from 'framer-motion';
 
 export default function FloatingCodeCard() {
   return (
-    <motion.div
-      style={{
-        position: 'absolute',
-        bottom: '5%',
-        right: '-20%',
-        zIndex: 10,
-        background: 'rgba(5, 8, 22, 0.85)',
-        border: '1px solid rgba(255, 255, 255, 0.1)',
-        borderRadius: '12px',
-        padding: '1rem 1.2rem',
-        backdropFilter: 'blur(12px)',
-        WebkitBackdropFilter: 'blur(12px)',
-        boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(97,218,251,0.15)',
-        fontFamily: 'var(--font-code)',
-        fontSize: '0.65rem',
-        lineHeight: 1.6,
-        minWidth: '240px',
-        pointerEvents: 'none',
-      }}
+    <>
+      <style>{`
+        .floating-code-card {
+          font-size: 0.65rem;
+          min-width: 240px;
+          padding: 1rem 1.2rem;
+          bottom: 5%;
+          right: -20%;
+        }
+        @media (max-width: 1024px) {
+          .floating-code-card {
+            font-size: 0.5rem !important;
+            min-width: 160px !important;
+            padding: 0.6rem 0.8rem !important;
+            bottom: 0 !important;
+            right: 0 !important;
+            transform-origin: bottom right;
+          }
+        }
+      `}</style>
+      <motion.div
+        className="floating-code-card"
+        style={{
+          position: 'absolute',
+          zIndex: 10,
+          background: 'rgba(5, 8, 22, 0.85)',
+          border: '1px solid rgba(255, 255, 255, 0.1)',
+          borderRadius: '12px',
+          backdropFilter: 'blur(12px)',
+          WebkitBackdropFilter: 'blur(12px)',
+          boxShadow: '0 20px 40px rgba(0,0,0,0.4), 0 0 20px rgba(97,218,251,0.15)',
+          fontFamily: 'var(--font-code)',
+          lineHeight: 1.6,
+          pointerEvents: 'none',
+        }}
       animate={{
         y: [-10, 10, -10],
       }}
@@ -80,5 +96,6 @@ export default function FloatingCodeCard() {
         <span style={{ color: '#e2e8f0' }}>{'}'}</span>
       </div>
     </motion.div>
+    </>
   );
 }
