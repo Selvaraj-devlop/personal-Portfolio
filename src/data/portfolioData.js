@@ -18,7 +18,7 @@ export const personalInfo = {
 };
 
 export const stats = [
-  { label: "Projects Built", value: 10, suffix: "+" },
+  { label: "Projects Built", value: 5, suffix: "+" },
   { label: "Internships", value: 2, suffix: "" },
   { label: "Technologies", value: 15, suffix: "+" },
   { label: "Certifications", value: 3, suffix: "" },

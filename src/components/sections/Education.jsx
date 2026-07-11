@@ -69,28 +69,30 @@ export default function Education() {
                         <span>{iconMap[edu.icon] || <FaGraduationCap />}</span>
                       </div>
 
-                      {/* Content */}
-                      <div className="flex-grow-1">
-                        <div className="edu-degree">{edu.degree}</div>
-                        <div className="edu-institution">{edu.institution}</div>
-                        <div className="edu-period d-flex align-items-center gap-2">
-                          <FiMapPin /> {edu.location}
+                      {/* Content & Badge Wrapper */}
+                      <div className="flex-grow-1 d-flex flex-column flex-sm-row justify-content-between align-items-start gap-2 w-100">
+                        <div>
+                          <div className="edu-degree">{edu.degree}</div>
+                          <div className="edu-institution" style={{ display: 'block', width: '100%', marginBottom: '0.2rem' }}>{edu.institution}</div>
+                          <div className="edu-period d-flex align-items-center gap-2" style={{ display: 'block', width: '100%' }}>
+                            <FiMapPin style={{ display: 'inline', verticalAlign: 'text-bottom' }} /> {edu.location}
+                          </div>
                         </div>
-                      </div>
 
-                      {/* Year badge */}
-                      <div style={{
-                        background: `${edu.color}18`,
-                        border: `1px solid ${edu.color}44`,
-                        color: edu.color,
-                        borderRadius: 12,
-                        padding: '0.3rem 0.7rem',
-                        fontSize: '0.72rem',
-                        fontFamily: 'var(--font-code)',
-                        whiteSpace: 'nowrap',
-                        marginLeft: '0.5rem',
-                      }}>
-                        {edu.period}
+                        {/* Year badge */}
+                        <div style={{
+                          background: `${edu.color}18`,
+                          border: `1px solid ${edu.color}44`,
+                          color: edu.color,
+                          borderRadius: 12,
+                          padding: '0.3rem 0.7rem',
+                          fontSize: '0.72rem',
+                          fontFamily: 'var(--font-code)',
+                          whiteSpace: 'nowrap',
+                          marginTop: '0.2rem',
+                        }}>
+                          {edu.period}
+                        </div>
                       </div>
                     </div>
                   </div>

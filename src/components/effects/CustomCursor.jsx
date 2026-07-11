@@ -22,6 +22,17 @@ export default function CustomCursor() {
       }
     };
 
+    const onTouch = (e) => {
+      if (e.touches && e.touches.length > 0) {
+        mouseX = e.touches[0].clientX;
+        mouseY = e.touches[0].clientY;
+        if (dot) {
+          dot.style.left = `${mouseX - 4}px`;
+          dot.style.top = `${mouseY - 4}px`;
+        }
+      }
+    };
+
     const lerp = (a, b, t) => a + (b - a) * t;
 
     const animate = () => {
@@ -51,11 +62,15 @@ export default function CustomCursor() {
     const handleMouseOut = () => setHovered(false);
 
     window.addEventListener('mousemove', onMove);
+    window.addEventListener('touchmove', onTouch, { passive: true });
+    window.addEventListener('touchstart', onTouch, { passive: true });
     document.addEventListener('mouseover', handleMouseOver);
     document.addEventListener('mouseout', handleMouseOut);
 
     return () => {
       window.removeEventListener('mousemove', onMove);
+      window.removeEventListener('touchmove', onTouch);
+      window.removeEventListener('touchstart', onTouch);
       document.removeEventListener('mouseover', handleMouseOver);
       document.removeEventListener('mouseout', handleMouseOut);
       cancelAnimationFrame(animId);

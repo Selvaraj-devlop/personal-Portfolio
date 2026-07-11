@@ -85,8 +85,8 @@ function getPos(ringIdx, angle) {
   const nd = (lz + R) / (2 * R);
 
   return {
-    pctX   : (sx / W) * 100,
-    pctY   : (sy / H) * 100,
+    px: sx - CX,
+    py: sy - CY,
     scale  : 0.55 + 0.55 * nd,
     opacity: 0.35 + 0.65 * nd,
     zIndex : lz > 0 ? 8 : 2,
@@ -111,10 +111,8 @@ export default function TechOrbit() {
         const el = iconRefs.current[i];
         if (!el) return;
         const angle = icon.phase + elapsed * RINGS[icon.ring].speed;
-        const { pctX, pctY, scale, opacity, zIndex } = getPos(icon.ring, angle);
-        el.style.left      = `${pctX.toFixed(3)}%`;
-        el.style.top       = `${pctY.toFixed(3)}%`;
-        el.style.transform = `translate(-50%,-50%) scale(${scale.toFixed(4)})`;
+        const { px, py, scale, opacity, zIndex } = getPos(icon.ring, angle);
+        el.style.transform = `translate(calc(-50% + ${px.toFixed(2)}px), calc(-50% + ${py.toFixed(2)}px)) scale(${scale.toFixed(4)})`;
         el.style.opacity   = opacity.toFixed(4);
         el.style.zIndex    = zIndex;
       });
@@ -123,10 +121,8 @@ export default function TechOrbit() {
         const el = satRefs.current[i];
         if (!el) return;
         const angle = sat.phase + elapsed * RINGS[sat.ring].speed;
-        const { pctX, pctY, scale, opacity, zIndex } = getPos(sat.ring, angle);
-        el.style.left      = `${pctX.toFixed(3)}%`;
-        el.style.top       = `${pctY.toFixed(3)}%`;
-        el.style.transform = `translate(-50%,-50%) scale(${(scale * 0.65).toFixed(4)})`;
+        const { px, py, scale, opacity, zIndex } = getPos(sat.ring, angle);
+        el.style.transform = `translate(calc(-50% + ${px.toFixed(2)}px), calc(-50% + ${py.toFixed(2)}px)) scale(${(scale * 0.65).toFixed(4)})`;
         el.style.opacity   = (opacity * 0.95).toFixed(4);
         el.style.zIndex    = zIndex;
       });
@@ -141,6 +137,18 @@ export default function TechOrbit() {
   const cpy = (CY / H) * 100;
 
   return (
+    <>
+    <style>{`
+      .orbit-node { width: 54px; height: 54px; }
+      .orbit-icon { font-size: 18px; }
+      .orbit-label { font-size: 5.5px; }
+      @media (max-width: 768px) {
+        .orbit-glass { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
+        .orbit-node { width: 36px !important; height: 36px !important; }
+        .orbit-icon { font-size: 14px !important; }
+        .orbit-label { font-size: 4px !important; }
+      }
+    `}</style>
     <div
       style={{ position: 'relative', width: '100%', maxWidth: W, aspectRatio: `${W}/${H}`, margin: '0 auto' }}
       role="img"
@@ -234,10 +242,11 @@ export default function TechOrbit() {
 
       {/* ── Central glowing React sphere ─────────────────────────── */}
       <motion.div
+        className="orbit-glass"
         style={{
           position: 'absolute',
-          left: `${cpx}%`,
-          top:  `${cpy}%`,
+          left: '50%',
+          top:  '50%',
           transform: 'translate(-50%,-50%)',
           zIndex: 5,
           width: 92, height: 92,
@@ -306,17 +315,17 @@ export default function TechOrbit() {
           ref={el => { iconRefs.current[i] = el; }}
           style={{
             position: 'absolute',
-            left: `${cpx}%`,
-            top:  `${cpy}%`,
+            left: '50%',
+            top:  '50%',
             transform: 'translate(-50%,-50%)',
-            willChange: 'transform, opacity, left, top',
+            willChange: 'transform, opacity',
           }}
         >
           <motion.div
             whileHover={{ scale: 1.5 }}
             transition={{ type: 'spring', stiffness: 320, damping: 18 }}
+            className="orbit-glass orbit-node"
             style={{
-              width: 54, height: 54,
               borderRadius: '50%',
               /* Dark navy glass */
               background: 'radial-gradient(circle at 33% 28%, rgba(97,218,251,0.22) 0%, rgba(3,10,22,0.92) 70%)',
@@ -337,14 +346,12 @@ export default function TechOrbit() {
               borderRadius:'50%', pointerEvents:'none',
             }}/>
 
-            <icon.Icon style={{
-              fontSize: 18,
+            <icon.Icon className="orbit-icon" style={{
               color: icon.color,
               filter: `drop-shadow(0 0 5px ${icon.color}) drop-shadow(0 0 10px rgba(97,218,251,0.5))`,
               flexShrink: 0,
             }}/>
-            <span style={{
-              fontSize: 5.5,
+            <span className="orbit-label" style={{
               fontFamily: 'var(--font-code)',
               color: 'rgba(165,243,252,0.95)',
               fontWeight: 600,
@@ -365,10 +372,10 @@ export default function TechOrbit() {
           ref={el => { satRefs.current[i] = el; }}
           style={{
             position: 'absolute',
-            left: `${cpx}%`,
-            top:  `${cpy}%`,
+            left: '50%',
+            top:  '50%',
             transform: 'translate(-50%,-50%)',
-            willChange: 'transform, opacity, left, top',
+            willChange: 'transform, opacity',
             zIndex: 3,
             pointerEvents: 'none',
           }}
@@ -396,5 +403,6 @@ export default function TechOrbit() {
 
 
     </div>
+    </>
   );
 }

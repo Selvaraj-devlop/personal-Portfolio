@@ -36,11 +36,20 @@ export default function Contact() {
       return;
     }
     setLoading(true);
-    // Simulate send (replace with EmailJS integration)
-    await new Promise((r) => setTimeout(r, 1500));
-    toast.success('Message sent! I\'ll get back to you soon. 🚀', { style: toastStyle });
-    setForm({ name: '', email: '', message: '' });
-    setLoading(false);
+    
+    // Simplest zero-setup method: open the user's default email client
+    const subject = encodeURIComponent(`Portfolio Contact from ${form.name}`);
+    const body = encodeURIComponent(`Name: ${form.name}\nEmail: ${form.email}\n\nMessage:\n${form.message}`);
+    const mailtoLink = `mailto:${personalInfo.email}?subject=${subject}&body=${body}`;
+    
+    window.location.href = mailtoLink;
+    
+    // Show success after a brief delay so the email client has time to open
+    setTimeout(() => {
+      toast.success('Opening your email client... 🚀', { style: toastStyle });
+      setForm({ name: '', email: '', message: '' });
+      setLoading(false);
+    }, 1000);
   };
 
   const toastStyle = {
@@ -54,7 +63,7 @@ export default function Contact() {
 
   const contactItems = [
     { Icon: FaEnvelope, label: 'Email', value: personalInfo.email, href: `mailto:${personalInfo.email}`, color: '#6C63FF' },
-    { Icon: FaPhone, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone}`, color: '#00E5FF' },
+    { Icon: (props) => <span style={{ display: 'inline-block', transform: 'scaleX(-1)' }}><FaPhone {...props} /></span>, label: 'Phone', value: personalInfo.phone, href: `tel:${personalInfo.phone}`, color: '#00E5FF' },
     { Icon: FaMapMarkerAlt, label: 'Location', value: personalInfo.location, href: '#', color: '#FF4ECD' },
     { Icon: FaLinkedin, label: 'LinkedIn', value: 'linkedin.com/in/selvarajc', href: personalInfo.linkedin, color: '#0077B5' },
     { Icon: FaGithub, label: 'GitHub', value: 'github.com/selvarajc', href: personalInfo.github, color: '#ffffff' },
@@ -121,7 +130,7 @@ export default function Contact() {
             {/* Download Resume button */}
             <div className="mt-3">
               <a
-                href="/resume.pdf"
+                href="/Selvaraj_Web.pdf"
                 download
                 className="btn-magnetic btn-primary-glow w-100 justify-content-center"
                 style={{ display: 'flex' }}

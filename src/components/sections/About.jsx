@@ -4,7 +4,9 @@ import { motion } from 'framer-motion';
 import { useMultiReveal } from '../../hooks/useScrollReveal';
 import { personalInfo, stats } from '../../data/portfolioData';
 import { useInView } from 'react-intersection-observer';
-import { FiMapPin, FiMail, FiPhone, FiBriefcase, FiUser } from 'react-icons/fi';
+import { FiUser } from 'react-icons/fi';
+import { FaPhone, FaMapMarkerAlt, FaEnvelope, FaBriefcase } from 'react-icons/fa';
+import profileImg from '../../assets/image/Selvaraj C.png';
 
 // Lightweight animated counter — no external dependency
 function useCountUp(end, duration = 2000, start = 0) {
@@ -85,10 +87,10 @@ export default function About() {
             {/* Info grid */}
             <div className="row g-3 reveal">
               {[
-                { icon: <FiMapPin />, label: 'Location', value: personalInfo.location },
-                { icon: <FiMail />, label: 'Email', value: personalInfo.email },
-                { icon: <FiPhone />, label: 'Phone', value: personalInfo.phone },
-                { icon: <FiBriefcase />, label: 'Status', value: 'Available for Opportunities' },
+                { icon: <FaMapMarkerAlt />, label: 'Location', value: personalInfo.location },
+                { icon: <FaEnvelope />, label: 'Email', value: personalInfo.email },
+                { icon: <span style={{ display: 'inline-block', transform: 'scaleX(-1)' }}><FaPhone /></span>, label: 'Phone', value: personalInfo.phone },
+                { icon: <FaBriefcase />, label: 'Status', value: 'Available for Opportunities' },
               ].map((item) => (
                 <div key={item.label} className="col-sm-6">
                   <div className="glass-card p-3 d-flex align-items-start gap-3">
@@ -112,7 +114,7 @@ export default function About() {
                 &lt;tech-stack /&gt;
               </div>
               <div className="d-flex flex-wrap gap-2">
-                {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'Bootstrap', 'REST APIs', 'Git'].map((t) => (
+                {['React.js', 'Node.js', 'Express.js', 'MongoDB', 'JavaScript', 'HTML5', 'CSS3', 'Bootstrap', 'REST APIs', 'Postman', 'Git'].map((t) => (
                   <span key={t} className="tech-badge">{t}</span>
                 ))}
               </div>
@@ -135,11 +137,11 @@ export default function About() {
                 width: 120, height: 120, borderRadius: '50%', margin: '0 auto 1rem',
                 background: 'linear-gradient(135deg, rgba(108,99,255,0.3), rgba(0,229,255,0.3))',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
-                fontSize: '3rem', border: '2px solid rgba(108,99,255,0.4)',
+                border: '2px solid rgba(108,99,255,0.4)',
                 boxShadow: '0 0 30px rgba(108,99,255,0.3)',
                 color: 'white',
               }}>
-                <FiUser />
+                <img src={profileImg} alt="Selvaraj C" style={{ width: '100%', height: '100%', objectFit: 'cover', borderRadius: '50%' }} />
               </div>
               <div style={{ fontFamily: 'var(--font-heading)', fontSize: '1.3rem', fontWeight: 700, color: 'white' }}>
                 Selvaraj C
@@ -148,7 +150,7 @@ export default function About() {
                 MERN Stack Developer
               </div>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>
-                📍 Tamil Nadu, India
+                📍 Tamil Nadu
               </div>
               <div style={{
                 position: 'absolute', top: 0, left: 0, right: 0, height: 3,

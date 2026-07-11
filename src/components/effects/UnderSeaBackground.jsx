@@ -35,7 +35,7 @@ export default function UnderSeaBackground() {
         left: '-10%',
         right: '-10%',
         height: '50vh',
-        background: 'radial-gradient(ellipse at top center, rgba(255,255,255,0.4) 0%, rgba(255,255,255,0.1) 40%, transparent 70%)',
+        background: 'radial-gradient(ellipse at top center, rgba(255,255,255,0.2) 0%, rgba(255,255,255,0.02) 40%, transparent 70%)',
         mixBlendMode: 'overlay',
         filter: 'blur(30px)',
       }} />
@@ -47,7 +47,7 @@ export default function UnderSeaBackground() {
         left: 0,
         right: 0,
         height: '20vh',
-        background: 'linear-gradient(to bottom, rgba(0,0,0,0.35) 0%, transparent 100%)',
+        background: 'linear-gradient(to bottom, rgba(0,0,0,0.55) 0%, transparent 100%)',
         pointerEvents: 'none',
       }} />
 
@@ -80,8 +80,17 @@ export default function UnderSeaBackground() {
       </div>
 
       {/* Floating Bubbles */}
+      <style>{`
+        @keyframes floatBubble {
+          0% { transform: translate(0, 0); opacity: 0; }
+          25% { transform: translate(calc(var(--x-offset) * 1px), -30vh); opacity: 0.7; }
+          50% { transform: translate(calc(var(--x-offset) * -1px), -60vh); opacity: 0.7; }
+          75% { transform: translate(calc(var(--x-offset) * 1px), -90vh); opacity: 0.7; }
+          100% { transform: translate(0, -120vh); opacity: 0; }
+        }
+      `}</style>
       {bubbles.map(b => (
-        <motion.div key={b.id} style={{
+        <div key={b.id} style={{
           position: 'absolute',
           bottom: -50,
           left: b.left,
@@ -91,22 +100,10 @@ export default function UnderSeaBackground() {
           background: 'linear-gradient(135deg, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0.05) 100%)',
           border: '1px solid rgba(255,255,255,0.6)',
           boxShadow: '0 4px 12px rgba(0,0,0,0.1), inset 0 0 8px rgba(255,255,255,0.6)',
-          backdropFilter: 'blur(4px)',
-          WebkitBackdropFilter: 'blur(4px)',
-        }}
-        initial={{ y: 0, x: 0, opacity: 0 }}
-        animate={{
-          y: '-120vh', // Float far above the screen
-          x: [0, b.xOffset, -b.xOffset, 0], // Wiggle left and right
-          opacity: [0, 0.7, 0.7, 0], // Fade in, hold, fade out
-        }}
-        transition={{ 
-          duration: b.duration, 
-          repeat: Infinity, 
-          delay: b.delay, 
-          ease: 'linear' 
-        }}
-        />
+          '--x-offset': b.xOffset,
+          animation: `floatBubble ${b.duration}s linear ${b.delay}s infinite`,
+          opacity: 0,
+        }} />
       ))}
 
       {/* Deep Sea Vignette (Darkens the bottom and edges) */}

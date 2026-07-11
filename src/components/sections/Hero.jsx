@@ -98,7 +98,7 @@ export default function Hero() {
             {/* Quick stats */}
             <motion.div className="d-flex gap-4 mt-4" {...fadeUp(0.6)}>
               {[
-                { val: '10+', label: 'Projects' },
+                { val: '5+', label: 'Projects' },
                 { val: '2',   label: 'Internships' },
                 { val: '15+', label: 'Technologies' },
               ].map((s) => (

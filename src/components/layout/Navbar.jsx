@@ -35,6 +35,7 @@ export default function Navbar({ onCommandOpen }) {
   useEffect(() => {
     const onScroll = () => {
       setScrolled(window.scrollY > 30);
+      setMobileOpen(false); // Auto close mobile menu on scroll
       for (let i = NAV_LINKS.length - 1; i >= 0; i--) {
         const el = document.getElementById(NAV_LINKS[i].href);
         if (el && el.getBoundingClientRect().top <= 130) {
@@ -199,7 +200,7 @@ export default function Navbar({ onCommandOpen }) {
 
               {/* Resume CTA */}
               <motion.a
-                href="/resume.pdf"
+                href="/Selvaraj_Web.pdf"
                 download
                 aria-label="Download Resume"
                 className="d-none d-md-flex"
@@ -370,7 +371,31 @@ export default function Navbar({ onCommandOpen }) {
               })}
 
               {/* Bottom CTA */}
-              <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(97,218,251,0.15)' }}>
+              <div style={{ marginTop: 'auto', paddingTop: '1.5rem', borderTop: '1px solid rgba(97,218,251,0.15)', display: 'flex', flexDirection: 'column', gap: '0.75rem' }}>
+                <a
+                  href="/Selvaraj_Web.pdf"
+                  download
+                  onClick={() => setMobileOpen(false)}
+                  style={{
+                    display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '8px',
+                    padding: '12px',
+                    borderRadius: '12px',
+                    background: 'transparent',
+                    border: '1px solid rgba(97,218,251,0.5)',
+                    color: '#61DAFB',
+                    textDecoration: 'none',
+                    fontFamily: 'var(--font-body)',
+                    fontSize: '0.85rem',
+                    fontWeight: 600,
+                  }}
+                >
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5">
+                    <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+                    <polyline points="7 10 12 15 17 10"/>
+                    <line x1="12" y1="15" x2="12" y2="3"/>
+                  </svg>
+                  Resume
+                </a>
                 <a
                   href={`mailto:${personalInfo.email}`}
                   onClick={() => setMobileOpen(false)}
