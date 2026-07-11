@@ -144,9 +144,16 @@ export default function TechOrbit() {
       .orbit-label { font-size: 5.5px; }
       @media (max-width: 768px) {
         .orbit-glass { backdrop-filter: none !important; -webkit-backdrop-filter: none !important; }
-        .orbit-node { width: 36px !important; height: 36px !important; }
-        .orbit-icon { font-size: 14px !important; }
-        .orbit-label { font-size: 4px !important; }
+        .orbit-node { 
+           width: 46px !important; 
+           height: 46px !important; 
+           min-width: 46px !important; 
+           min-height: 46px !important; 
+           aspect-ratio: 1/1 !important; 
+           flex-shrink: 0 !important; 
+        }
+        .orbit-icon { font-size: 16px !important; }
+        .orbit-label { font-size: 5px !important; }
       }
     `}</style>
     <div

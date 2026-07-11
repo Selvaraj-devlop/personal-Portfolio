@@ -129,11 +129,11 @@ export default function Footer() {
           <div className="footer-divider" />
 
           {/* Bottom */}
-          <div className="d-flex flex-wrap justify-content-between align-items-center gap-3">
+          <div className="d-flex flex-column flex-md-row justify-content-between align-items-center gap-3 text-center">
             <div className="footer-copyright">
               © {new Date().getFullYear()} Selvaraj C. All rights reserved.
             </div>
-            <div style={{ display: 'flex', alignItems: 'center', gap: '0.3rem', fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-code)' }}>
+            <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'center', gap: '0.3rem', fontSize: '0.75rem', color: 'var(--text-muted)', fontFamily: 'var(--font-code)' }}>
               Made with <FaHeart style={{ color: '#ff4ecd', fontSize: '0.75rem' }} /> using React & Bootstrap
             </div>
           </div>
